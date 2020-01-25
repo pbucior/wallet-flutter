@@ -8,8 +8,16 @@ class WalletScreen extends StatefulWidget {
 class _WalletScreenState extends State<WalletScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Scaffold(
+      body: Column(),
+      floatingActionButton: FloatingActionButton(
+        tooltip: "Add operation",
+        backgroundColor: Colors.red,
+        child: ListTile(
+          title: Icon(Icons.add),
+        ),
+        onPressed: null,
+      ),
     );
   }
 }
