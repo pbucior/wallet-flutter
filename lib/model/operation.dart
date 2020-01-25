@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Operation extends StatelessWidget {
   DateTime _dateAdded;
@@ -8,7 +9,8 @@ class Operation extends StatelessWidget {
   String _postingKey;
   int _id;
 
-  Operation(this._dateAdded, this._dateOperation, this._amount, this._description, this._postingKey);
+  Operation(this._dateAdded, this._dateOperation, this._amount,
+      this._description, this._postingKey);
 
   Operation.map(dynamic obj) {
     this._dateAdded = obj["dateAdded"];
@@ -52,8 +54,26 @@ class Operation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    final formatCurrency = new NumberFormat.currency(decimalDigits: 2);
+    return new Container(
+      color: Colors.white,
+      child: ListTile(
+        title: Text(
+          _description,
+          style: TextStyle(fontSize: 20.0),
+        ),
+        subtitle: Text("$_dateOperation"),
+        trailing: Text(formatCurrency.format(_amount)),
+        leading: _postingKey == 'Amount'
+            ? Icon(
+                Icons.arrow_upward,
+                color: Colors.green,
+              )
+            : Icon(
+                Icons.arrow_downward,
+                color: Colors.red,
+              ),
+      ),
     );
   }
 }
