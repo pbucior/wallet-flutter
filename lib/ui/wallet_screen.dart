@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wallet/ui/new_operation.dart';
 
 class WalletScreen extends StatefulWidget {
   @override
@@ -16,7 +17,13 @@ class _WalletScreenState extends State<WalletScreen> {
         child: ListTile(
           title: Icon(Icons.add),
         ),
-        onPressed: null,
+        onPressed: () {
+          //_showDialog(context);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => NewOperation()),
+          );
+        },
       ),
     );
   }
