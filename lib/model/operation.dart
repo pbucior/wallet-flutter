@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class Operation extends StatelessWidget {
-  DateTime _dateAdded;
-  DateTime _dateOperation;
+  int _dateAdded;
+  String _dateOperation;
   double _amount;
   String _description;
   String _postingKey;
@@ -21,8 +21,8 @@ class Operation extends StatelessWidget {
     this._id = obj["id"];
   }
 
-  DateTime get dateAdded => _dateAdded;
-  DateTime get dateOperation => _dateOperation;
+  int get dateAdded => _dateAdded;
+  String get dateOperation => _dateOperation;
   double get amount => _amount;
   String get description => _description;
   String get postingKey => _postingKey;

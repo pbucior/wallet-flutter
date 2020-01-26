@@ -50,7 +50,7 @@ class DatabaseHelper {
   Future<List> getOperations() async {
     var dbClient = await db;
     var result = await dbClient
-        .rawQuery("SELECT * FROM $tableName ORDER BY $columnDateOperation ASC");
+        .rawQuery("SELECT * FROM $tableName ORDER BY $columnDateAdded DESC");
     return result.toList();
   }
 

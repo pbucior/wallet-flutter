@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewOperation extends StatefulWidget {
   @override
@@ -11,6 +12,7 @@ class _NewOperationState extends State<NewOperation> {
   double amount;
   int radioValue = 0;
   String postingKey = "Expense";
+  DateTime dateTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +64,23 @@ class _NewOperationState extends State<NewOperation> {
                   ),
                 ],
               )),
+          OutlineButton(
+            child: Text(formatDate(dateTime)),
+            onPressed: () {
+              showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2019),
+                      lastDate: DateTime(2099))
+                  .then((date) {
+                if (date != null) {
+                  setState(() {
+                    dateTime = date;
+                  });
+                }
+              });
+            },
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -112,5 +131,12 @@ class _NewOperationState extends State<NewOperation> {
     if (form.validate()) {
       Navigator.pop(context, true);
     }
+  }
+
+  String formatDate(DateTime dateTime2) {
+    var formatter = DateFormat("y-MM-d");
+    String formattedDate = formatter.format(dateTime);
+
+    return formattedDate;
   }
 }
