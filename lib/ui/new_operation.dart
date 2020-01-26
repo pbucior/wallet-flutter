@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:wallet/model/operation.dart';
+import 'package:wallet/util/date_format.dart';
+import 'package:wallet/util/database_client.dart';
 
 class NewOperation extends StatefulWidget {
   @override
@@ -12,7 +14,8 @@ class _NewOperationState extends State<NewOperation> {
   double amount;
   int radioValue = 0;
   String postingKey = "Expense";
-  DateTime dateTime = DateTime.now();
+  DateTime dateOperation = DateTime.now();
+  var db = DatabaseHelper();
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +68,7 @@ class _NewOperationState extends State<NewOperation> {
                 ],
               )),
           OutlineButton(
-            child: Text(formatDate(dateTime)),
+            child: Text(formatDate(dateOperation)),
             onPressed: () {
               showDatePicker(
                       context: context,
@@ -75,7 +78,7 @@ class _NewOperationState extends State<NewOperation> {
                   .then((date) {
                 if (date != null) {
                   setState(() {
-                    dateTime = date;
+                    dateOperation = date;
                   });
                 }
               });
@@ -126,17 +129,13 @@ class _NewOperationState extends State<NewOperation> {
     });
   }
 
-  void handleSubmit() {
+  void handleSubmit() async {
     final FormState form = _formKey.currentState;
     if (form.validate()) {
+      Operation operation = Operation(nowTimeStamp(), formatDate(dateOperation),
+          amount, description, postingKey);
+      await db.saveItem(operation);
       Navigator.pop(context, true);
     }
-  }
-
-  String formatDate(DateTime dateTime2) {
-    var formatter = DateFormat("y-MM-d");
-    String formattedDate = formatter.format(dateTime);
-
-    return formattedDate;
   }
 }
