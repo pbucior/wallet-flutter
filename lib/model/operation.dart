@@ -64,7 +64,7 @@ class Operation extends StatelessWidget {
         ),
         subtitle: Text("$_dateOperation"),
         trailing: Text(formatCurrency.format(_amount)),
-        leading: _postingKey == 'Amount'
+        leading: _postingKey == 'Profit'
             ? Icon(
                 Icons.arrow_upward,
                 color: Colors.green,

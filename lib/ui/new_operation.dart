@@ -132,6 +132,8 @@ class _NewOperationState extends State<NewOperation> {
   void handleSubmit() async {
     final FormState form = _formKey.currentState;
     if (form.validate()) {
+      form.save();
+      form.reset();
       Operation operation = Operation(nowTimeStamp(), formatDate(dateOperation),
           amount, description, postingKey);
       await db.saveItem(operation);

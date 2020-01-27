@@ -38,7 +38,7 @@ class DatabaseHelper {
 
   void _onCreate(Database db, int version) async {
     await db.execute(
-        "CREATE TABLE $tableName($columnId INTEGER PRIMARY KEY, $columnDateAdded TEXT, $columnDateOperation TEXT, $columnAmount REAL, $columnDescription TEXT, $columnPostingKey TEXT)");
+        "CREATE TABLE $tableName($columnId INTEGER PRIMARY KEY, $columnDateAdded INTEGER, $columnDateOperation TEXT, $columnAmount REAL, $columnDescription TEXT, $columnPostingKey TEXT)");
   }
 
   Future<int> saveItem(Operation operation) async {
