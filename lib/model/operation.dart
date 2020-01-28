@@ -52,6 +52,12 @@ class Operation extends StatelessWidget {
     this._id = map["id"];
   }
 
+  double getValue() {
+    double value;
+    this.postingKey == "Expense" ? value = -(this.amount) : value = this.amount;
+    return value;
+  }
+
   @override
   Widget build(BuildContext context) {
     final formatCurrency = new NumberFormat.currency(decimalDigits: 2);
